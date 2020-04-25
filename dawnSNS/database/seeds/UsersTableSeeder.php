@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
             'username' => 'hikaru',
             'mail' => 'sky@mail',
             'password' => '4dare',
-            'bio' => '初めまして！'
-    ];
-    DB::table('homestead')->insert($param);
+            'bio' => '初めまして！',
+        ];
+    DB::table('users')->insert($param);
     }
 }
