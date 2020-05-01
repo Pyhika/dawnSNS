@@ -11,28 +11,29 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+ Route::get('/', function () {
+     return view('welcome');
+ });
 // Route::get('/home', 'HomeController@index')->name('home');
-
-//Auth::routes();
 
 
 //ログアウト中のページ
-Route::get('/login', 'Auth\LoginController@login');
-Route::post('/login', 'Auth\LoginController@login');
-
-Route::get('/register', 'Auth\RegisterController@register');
-Route::post('/register', 'Auth\RegisterController@register');
-
-Route::get('/added', 'Auth\RegisterController@added');
+//Route::get('/login', 'Auth\LoginController@login');
+//Route::post('/login/{mail}/{password}', 'Auth\LoginController@login');
+//
+//Route::get('/register', 'Auth\RegisterController@register');
+//Route::post('/register', 'Auth\RegisterController@register');
+//
+//Route::get('/added', 'Auth\RegisterController@added');
 
 
 //ログイン中のページ
-Route::get('/top','PostsController@index');
+//TOPページ
+Route::get('/index','PostsController@index');
 
+//プロフィールのUpdateについて
 Route::get('/profile','UsersController@profile');
+Route::post('/post/update', 'PostsController@updateForm');
 
 Route::get('/search','UsersController@index');
 
@@ -40,4 +41,13 @@ Route::get('/follow-list','PostsController@index');
 Route::get('/follower-list','PostsController@index');
 
 
+//Createについて
+Route::post('/post/create', 'PostsController@create');
 
+
+//Deleteについて
+Route::get('/post/{id}/delete', 'PostsController@delete');
+
+//auth認証
+//Auth::routes();
+//Route::get('/home', 'HomeController@index')->name('home');

@@ -22,15 +22,15 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a><img src="images/logo.png"></a></h1>
+        <h1><a href=../index><img src="images/main_logo.png"></a></h1>
             <div id="">
                 <div id="">
-                    <p>〇〇さん<img src="images/arrow.png"></p>
+                    <p>{{ $list->username }}さん<img src="images/dawn.png"></p>
                 <div>
                 <ul>
-                    <li><a href="/top">ホーム</a></li>
-                    <li><a href="/profile">プロフィール</a></li>
-                    <li><a href="/logout">ログアウト</a></li>
+                    <li><a href="../index">ホーム</a></li>
+                    <li><a href="/profile">プロフィール編集</a></li>
+                    <li><a href="/login">ログアウト</a></li>
                 </ul>
             </div>
         </div>
@@ -41,7 +41,7 @@
         </div >
         <div id="side-bar">
             <div id="confirm">
-                <p>〇〇さんの</p>
+                <p>{{ $list->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>
                 <p>〇〇名</p>
