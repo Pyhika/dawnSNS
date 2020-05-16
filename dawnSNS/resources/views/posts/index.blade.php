@@ -6,7 +6,7 @@
 
 <p>アイコン</p>
 <form action="index" method="POST">
-    <input type="text" name="send" placeholder="何をつぶやこうかな...">     
+    <input type="textare" name="send" placeholder="何をつぶやこうかな...">     
     <input type="submit" value="投稿ボタン">
 </form>
 </br>

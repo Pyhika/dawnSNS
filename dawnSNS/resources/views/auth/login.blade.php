@@ -2,7 +2,7 @@
 
 @section('content')
 
-{!! Form::open() !!}
+{!! Form::open(['route' => 'posts.index']) !!}
 
 <p>DAWNSNSへようこそ</p>
 
