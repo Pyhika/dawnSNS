@@ -12,8 +12,8 @@ class UsersTableSeeder extends Seeder
     public function run(){
         $param = [
             'username' => 'hikaru',
-            'mail' => 'test6@mail',
-            'password' => '666666',
+            'mail' => 'test7@mail',
+            'password' => '777777',
             'bio' => '初めまして！',
             'images' => 'dawn.png',
         ];
@@ -21,8 +21,8 @@ class UsersTableSeeder extends Seeder
         
         $param = [
             'username' => 'hika',
-            'mail' => 'test5@mail',
-            'password' => '555555',
+            'mail' => 'test8@mail',
+            'password' => '888888',
             'bio' => '初めまして！初めまして！',
             'images' => 'dawn.png',
         ];

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -71,21 +71,20 @@ class RegisterController extends Controller
     }
 
 
-    // public function registerForm(){
-    //     return view("auth.register");
-    // }
+     public function add(){
+         return view("auth.register");
+     }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
-            $data = $request->input();
+    
+    public function added(Request $request){
+            $users = new User;
+            
+            $users->username = $request->input('username');
+            $users->mail = $request->input('mail');
+            $users->password = $request->input('password');
+        
+            $users->save();
+            return redirect('auth.added');
 
-            $this->create($data['username']);
-            return redirect('added');
-        }
-        return view('auth.register');
-    }
-
-    public function added(){
-        return view('auth.added');
     }
 }
