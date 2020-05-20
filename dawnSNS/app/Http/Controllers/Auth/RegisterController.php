@@ -77,14 +77,15 @@ class RegisterController extends Controller
 
     
     public function added(Request $request){
-            $users = new User;
-            
-            $users->username = $request->input('username');
-            $users->mail = $request->input('mail');
-            $users->password = $request->input('password');
         
-            $users->save();
-            return redirect('auth.added');
-
+        $users = new User;
+            
+        $users->username = $request->input('username');
+        $users->mail = $request->input('mail');
+        $users->password = $request->input('password');
+        
+        $users->save();
+        return view('auth.added');
     }
 }
+    

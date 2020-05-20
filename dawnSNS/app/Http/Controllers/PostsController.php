@@ -12,11 +12,15 @@ class PostsController extends Controller
 //    {
 //        $this->middleware('auth');
 //    }
+    public function home(){
+        $lists = \DB::table('users')->get();
+        return view('posts.index',['lists'=>$lists]);
+    }
     
     public function index()
     {
-        $list = \DB::table('users')->get();
-        return view('posts.index',['list'=>$list]);
+        $lists = \DB::table('users')->get();
+        return view('posts.index',['lists'=>$lists]);
     }
     
     //Createについて
@@ -53,8 +57,8 @@ class PostsController extends Controller
     }
     
     public function profile(){
-        $list = \DB::table('users')->get();
-        return view('users.profile',['list'=>$list]);
+        $users = \DB::table('users')->get();
+        return view('users.profile',['users'=>$users]);
     }
     
     public function search(){
