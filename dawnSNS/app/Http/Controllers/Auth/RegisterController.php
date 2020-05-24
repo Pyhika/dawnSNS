@@ -77,15 +77,19 @@ class RegisterController extends Controller
 
     
     public function added(Request $request){
+        //バリデーション
+        validator();
         
+        //保存処理
         $users = new User;
-            
         $users->username = $request->input('username');
         $users->mail = $request->input('mail');
         $users->password = $request->input('password');
-        
         $users->save();
-        return view('auth.added');
+        
+        //view表示
+        $res = $request->input('username');
+        return view('auth.added', ['message'=>$res]);
     }
 }
     
