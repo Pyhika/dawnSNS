@@ -22,15 +22,15 @@
 <body>
     <header>
         <div id = "head">
-        <h1><a href="{{ route('posts.home') }}"><img src="images/main_logo.png"></a></h1>
+        <h1><a><img src="images/logo.png"></a></h1>
             <div id="">
                 <div id="">
-                    <p>〇〇さん<img src="images/dawn.png"></p>
+                    <p>〇〇さん<img src="images/arrow.png"></p>
                 <div>
                 <ul>
-                    <li><a href="{{ route('posts.home') }}">ホーム</a></li>
-                    <li><a href="{{ route('posts.profile') }}">プロフィール編集</a></li>
-                    <li><a href="{{ route('login') }}">ログアウト</a></li>
+                    <li><a href="/top">ホーム</a></li>
+                    <li><a href="/profile">プロフィール</a></li>
+                    <li><a href="/logout">ログアウト</a></li>
                 </ul>
             </div>
         </div>
@@ -46,12 +46,12 @@
                 <p>フォロー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="{{ route('follows.followList') }}">フォローリスト</a></p>
+                <p class="btn"><a href="">フォローリスト</a></p>
                 <div>
                 <p>フォロワー数</p>
                 <p>〇〇名</p>
                 </div>
-                <p class="btn"><a href="{{ route('follows.followerList') }}">フォロワーリスト</a></p>
+                <p class="btn"><a href="">フォロワーリスト</a></p>
             </div>
             <p class="btn"><a href="">ユーザー検索</a></p>
         </div>

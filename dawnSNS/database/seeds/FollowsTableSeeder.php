@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\Follow;
 
 class FollowsTableSeeder extends Seeder
 {
@@ -9,8 +10,12 @@ class FollowsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
-        //
+    public function run(){
+        for ($i = 2; $i <= 10; $i++) {
+            Follow::create([
+                'follow_id' => $i,
+                'follower_id' => 1
+            ]);
+        }
     }
 }

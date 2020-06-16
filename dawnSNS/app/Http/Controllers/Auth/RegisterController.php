@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserAdd;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected $redirectTo = '/auth.login';
 
     /**
      * Create a new controller instance.
@@ -41,21 +43,6 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
-    }
-
-    /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -65,31 +52,37 @@ class RegisterController extends Controller
     {
         return User::create([
             'username' => $data['username'],
-            'mail' => $data['mail'],
-            'password' => bcrypt($data['password']),
+            'email' => $data['email'],
+//            'password' => bcrypt($data['password']),
+            'password' => Hash::make($data['password']),
         ]);
     }
 
 
-     public function add(){
-         return view("auth.register");
-     }
+    // public function registerForm(){
+    //     return view("auth.register");
+    // }
 
-    
-    public function added(Request $request){
-        //バリデーション
-        validator();
+    public function register(Request $request){
+        if($request->isMethod('post')){
+            $data = $request->input();
+
+            $this->create($data);
+            return redirect('/auth.added');
+        }
+        return view('/auth.register');
+    }
         
+    public function added(UserAdd $request){
         //保存処理
         $users = new User;
         $users->username = $request->input('username');
-        $users->mail = $request->input('mail');
+        $users->email = $request->input('email');
         $users->password = $request->input('password');
         $users->save();
         
         //view表示
         $res = $request->input('username');
-        return view('auth.added', ['message'=>$res]);
+        return view('/auth.added', ['message'=>$res]);
     }
 }
-    

@@ -27,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/index';
+    protected $redirectTo = '/posts.index';
 
     /**
      * Create a new controller instance.
@@ -39,16 +39,23 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     
+    protected function validateLogin(Request $request){
+        $this->validate($request,[
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|between:4,10|confirmed',
+        ]);
+    }
+    
     public function login(Request $request){
         if($request->isMethod('post')){
             
-            $data=$request->only('mail','password');
+            $data=$request->only('email','password');
             // ログインが成功したら、トップページへ
             //↓ログイン条件は公開時には消すこと
             if(Auth::attempt($data)){
-                return redirect('/index');
+                return redirect('/posts.index');
             }
         }
-        return view("auth.login");
+        return view("/auth.login");
     }
 }
