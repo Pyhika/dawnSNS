@@ -18,6 +18,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'bio',
         'images',
     ];
 
@@ -29,4 +30,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    
+    public function followers(){
+        return $this->belongsToMany(self::class, 'follows', 'follow_id', 'follower_id');
+    }
+    
+    public function follows(){
+        return $this->belongsToMany(self::class, 'follows', 'follow_id', 'follower_id');
+    }
 }
