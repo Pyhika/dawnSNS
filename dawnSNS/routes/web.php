@@ -11,12 +11,11 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('login') 
-// });
-// Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+ Route::get('/', function () {
+     return view('login');
+ });
+// Route::get('/home', 'HomeController@index')->name('home');
 
 //ログアウト中のページ
 //未認証
@@ -25,12 +24,15 @@ Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::get('/register', 'Auth\RegisterController@register');
-Route::post('/register/', 'Auth\RegisterController@register');
+Route::post('/register', 'Auth\RegisterController@register');
 
-Route::post('/added/', 'Auth\RegisterController@added')->name('auth.added');
+Route::post('/added', 'Auth\RegisterController@added')->name('auth.added');
 
 //ログイン中のページ
-Route::post('/index','PostsController@index')->name('posts.index');
+
+Route::group(['middleware' => 'auth'], function(){
+    Route::post('/posts/index','PostsController@index')->name('posts.index');
+});
 
 Route::get('/profile','UsersController@profile');
 

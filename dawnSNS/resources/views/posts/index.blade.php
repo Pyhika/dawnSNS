@@ -1,4 +1,4 @@
-@extends('layouts.login')
+@extends('layouts.app')
 
 @section('content')
 <h2>機能を実装していきましょう。</h2>

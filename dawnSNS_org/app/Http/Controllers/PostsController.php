@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use App\Models\User;
+use App\Models\Post;
+use App\Models\Follow;
 
 class PostsController extends Controller
 {
@@ -11,9 +16,9 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view("/posts/index");
+    public function index(Request $request){
+        $items = Post::with('user')->get();
+        return view('posts.index', ['items' => $items]);
     }
 
     /**
@@ -21,9 +26,9 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        $user = auth()->user();
+        return view('posts.index', ['user'=>$user]);
     }
 
     /**
@@ -32,10 +37,13 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        return redirect("/posts/index");
-    }
+    public function store(Request $request){
+        $post = new Post;
+        $form = $request->all();
+        unset($form['_token']);
+        $postdata->fill($form)->save();
+        return redirect('posts');
+    }   
 
     /**
      * Display the specified resource.
@@ -54,6 +62,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+//    editアクションはpostの編集用画面を表示させる。
     public function edit($id)
     {
         //
@@ -66,6 +75,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+//    updateアクションはarticleを編集後、送信ボタンをクリックしその内容を送信した後にarticlesテーブルに編集されたデータを格納するために行われる。そのためHTTPメソッドはPOSTとなる。
     public function update(Request $request, $id)
     {
         //
@@ -77,6 +87,7 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+//    送信内容の削除
     public function destroy($id)
     {
         //
