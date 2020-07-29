@@ -83,13 +83,13 @@
                 </div>
                 <p class="btn"><a href="">フォロワーリスト</a></p>
             </div>
-            <p class="btn"><a href="">ユーザー検索</a></p>
+            <p class="btn"><a href="users">ユーザー検索</a></p>
         </div>
     </div>
             
     <footer>
     </footer>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="JavaScriptファイルのURL"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

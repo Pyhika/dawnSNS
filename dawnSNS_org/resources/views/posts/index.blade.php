@@ -6,11 +6,12 @@
 <div>
     <img src="images/dawn.png">
     <p>{{Auth()->user()->username}}</p>
-    <form method="post" action="posts">
+    <form method="post" action="{{ route('posts.store') }}">
+        {{ csrf_field() }}
         <div class="form-group">
-          <textarea class="form-control"rows="5" name="post" placeholder="何をつぶやこうかな..."></textarea>
+            <textarea class="form-control"rows="5" name="post" placeholder="何をつぶやこうか...?"></textarea>
         </div>
-        <input type="submit" class="btn btn-primary" value="投稿"/>
+        <input type="image" class="btn btn-primary" src="images/post.png"/>
     </form>
 </div>
 <!--    投稿機能終了-->
@@ -26,7 +27,42 @@
                         <td>{{ $item->user->username }}</td>
                         <td>{{ $item->post }}</td>
                         <td>{{ $item->created_at }}</td>
-                        <td></td>
+<!--                        編集用ボタン-->
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+                                <img src="images/edit.png" alt="edit">
+                            </button>
+                        </td>
+<!--                        編集用モーダルウィンドウ-->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-body">
+                                <form method="post" action="{{ route('posts.update', ['id'=>$item->id]) }}">
+                                  <div class="form-group">
+                                    <label for="messageText" class="control-label"></label>
+                                    <textarea class="form-control" id="messageText"></textarea>
+                                  </div>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button id="save" type="button" class="btn btn-primary"><img src="images/edit.png" alt="edit"></button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+<!--                        削除用ボタン-->
+                        <td>
+                            <div class="btn btn-danger">
+                                <form method="post" action="{{ route('posts.destroy', ['id' => $item->id]) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('DELETE') }}
+                                    <button type="submit" onclick="return window.confirm('削除しますか？');">
+                                        <img src="images/trash_h.png">
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </table>

@@ -19,7 +19,7 @@ class UsersController extends Controller
     public function index(User $user)
     {
         $all_users = $user->getAllUsers(auth()->user()->id);
-        return view('users.index', ['all_users' => $all_users]);
+        return view('users.search', ['all_users' => $all_users]);
     }
 
     /**
@@ -89,8 +89,7 @@ class UsersController extends Controller
     }
     
         // フォロー
-    public function follow(User $user)
-    {
+    public function follow(User $user){
         $follower = auth()->user();
         // フォローしているか
         $is_following = $follower->isFollowing($user->id);
@@ -102,8 +101,7 @@ class UsersController extends Controller
     }
 
     // フォロー解除
-    public function unfollow(User $user)
-    {
+    public function unfollow(User $user){
         $follower = auth()->user();
         // フォローしているか
         $is_following = $follower->isFollowing($user->id);

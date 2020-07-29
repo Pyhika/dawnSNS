@@ -27,8 +27,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
-        $user = auth()->user();
-        return view('posts.index', ['user'=>$user]);
+        //
     }
 
     /**
@@ -37,11 +36,16 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-        $post = new Post;
-        $form = $request->all();
-        unset($form['_token']);
-        $postdata->fill($form)->save();
+    public function store(Request $request, Post $post){
+        $user = auth()->user();
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'post' => ['required', 'string', 'max:140']
+        ]);
+
+        $validator->validate();
+        $post->postStore($user->id, $data);
+        
         return redirect('posts');
     }   
 
@@ -63,9 +67,19 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 //    editアクションはpostの編集用画面を表示させる。
-    public function edit($id)
-    {
+    public function edit(Post $post){
         //
+        $user = auth()->user();
+        $posts = $post->getEditPost($user->id, $post->id);
+        
+        if (!isset($posts)){
+            return redirect('posts');
+        }
+        
+        return view('posts.edit', [
+            'user' => $user,
+            'posts' => $posts
+        ]);
     }
 
     /**
@@ -76,9 +90,20 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 //    updateアクションはarticleを編集後、送信ボタンをクリックしその内容を送信した後にarticlesテーブルに編集されたデータを格納するために行われる。そのためHTTPメソッドはPOSTとなる。
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, Post $post){
         //
+        $post = Post::find($id);
+        
+        $user = auth()->user();
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'post' => ['required', 'string', 'max:140']
+        ]);
+
+        $validator->validate();
+        $post->postStore($user->id, $data);
+        
+        return redirect('posts');
     }
 
     /**
@@ -88,8 +113,11 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 //    送信内容の削除
-    public function destroy($id)
-    {
+    public function destroy(Post $post){
         //
+        $user = auth()->user();
+        $post->postDestroy($user->id, $post->id);
+        
+        return back();
     }
 }
