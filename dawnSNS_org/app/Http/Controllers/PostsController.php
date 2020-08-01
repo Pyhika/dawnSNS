@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\EditPost;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Follow;
@@ -69,17 +70,6 @@ class PostsController extends Controller
 //    editアクションはpostの編集用画面を表示させる。
     public function edit(Post $post){
         //
-        $user = auth()->user();
-        $posts = $post->getEditPost($user->id, $post->id);
-        
-        if (!isset($posts)){
-            return redirect('posts');
-        }
-        
-        return view('posts.edit', [
-            'user' => $user,
-            'posts' => $posts
-        ]);
     }
 
     /**
@@ -90,18 +80,14 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
 //    updateアクションはarticleを編集後、送信ボタンをクリックしその内容を送信した後にarticlesテーブルに編集されたデータを格納するために行われる。そのためHTTPメソッドはPOSTとなる。
-    public function update(Request $request, Post $post){
+    public function update(EditPost $request, Post $post){
         //
-        $post = Post::find($id);
-        
         $user = auth()->user();
-        $data = $request->all();
-        $validator = Validator::make($data, [
-            'post' => ['required', 'string', 'max:140']
-        ]);
-
-        $validator->validate();
-        $post->postStore($user->id, $data);
+        //配列
+        $id = $request->input('id');
+        $data = $request->input('newPost');
+        
+        $post->postUpdate($user->id, $post->id, $data);
         
         return redirect('posts');
     }
@@ -118,6 +104,7 @@ class PostsController extends Controller
         $user = auth()->user();
         $post->postDestroy($user->id, $post->id);
         
+//        return redirect('posts');と同じ
         return back();
     }
 }

@@ -28,7 +28,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
     
     //投稿関連
-    Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'edit', 'update', 'destroy']]);
+    Route::resource('posts', 'PostsController', ['only' => ['index', 'store', 'show', 'update', 'destroy']]);
     
 });
 

@@ -35,16 +35,11 @@ class Post extends Model
         return;
     }
     
-    // 編集機能
-    public function getEditPost(Int $user_id, Int $post_id){
-        return $this->where('user_id', $user_id)->where('id', $post_id)->first();
-    }
-    
-    public function postUpdate(Int $user_id, Array $data){
-        $this->id->$post_id;
-        $this->text->$data['text'];
-        $this->update();
-        return;
+    // 編集機能    
+    public function postUpdate(Int $user_id, Int $post_id, String $data){
+        return $this->where('user_id', $user_id)
+                    ->where('id', $post_id)
+                    ->update(['post' => $data]);
     }
     
     //削除機能

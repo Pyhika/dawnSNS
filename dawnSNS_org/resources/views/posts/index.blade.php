@@ -38,16 +38,19 @@
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-body">
-                                <form method="post" action="{{ route('posts.update', ['id'=>$item->id]) }}">
+                                <form method="post" action="{{ route('posts.update', ['id' => $item->id]) }}">
+                                    {{ csrf_field() }}
+                                    {{ method_field('PUT') }}
                                   <div class="form-group">
                                     <label for="messageText" class="control-label"></label>
-                                    <textarea class="form-control" id="messageText"></textarea>
+                                    <textarea class="form-control" id="messageText" name="newPost" placeholder=""></textarea>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="submit" class="btn btn-primary">
+                                        <img src="images/edit.png" alt="edit">
+                                      </button>
                                   </div>
                                 </form>
-                              </div>
-                              <div class="modal-footer">
-                                <button id="save" type="button" class="btn btn-primary"><img src="images/edit.png" alt="edit"></button>
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -58,7 +61,7 @@
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <button type="submit" onclick="return window.confirm('削除しますか？');">
-                                        <img src="images/trash_h.png">
+                                        <img src="images/trash.png">
                                     </button>
                                 </form>
                             </div>
