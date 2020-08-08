@@ -1,3 +1,26 @@
+@charset "utf-8";
+html{
+}
+body{
+}
+/* header */
+header{
+    background:#3C4767;
+}
+
+/* main content */
+#row{
+    display: flex;
+    flex-flow: row wrap;
+}
+#container{
+    flex: 0 0 80%;
+}
+#side-bar{
+    flex: 0 0 19%;
+    border-left: 1px solid #6C6C6C;
+}
+
 /* モーダルのスタイル */
 .modal-main{
   display: none;
@@ -41,12 +64,4 @@
   color: #00afcc;
   background-color: #e4e0e1;
   transition: 0.6s;
-}
-
-.content-main{
-    float: left;
-}
-
-.right-nav{
-    float: right;
 }
