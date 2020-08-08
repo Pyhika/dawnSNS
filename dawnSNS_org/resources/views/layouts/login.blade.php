@@ -65,12 +65,12 @@
             
     <div id="row">
 <!--        コンテンツ内容別記載 -->
-        <div id="container">
+        <div id="container" class="content-main">
             @yield('content')
         </div >
 <!--        共通サイドバー -->
         <div id="side-bar">
-            <div id="confirm">
+            <div id="confirm" class="right-nav">
                 <p>{{ Auth()->user()->username }}さんの</p>
                 <div>
                 <p>フォロー数</p>

@@ -40,7 +40,7 @@
                               <div class="modal-body">
                                 <form method="post" action="{{ route('posts.update', ['id' => $item->id]) }}">
                                     {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
+                                    {{ method_field('PATCH') }}
                                   <div class="form-group">
                                     <label for="messageText" class="control-label"></label>
                                     <textarea class="form-control" id="messageText" name="newPost" placeholder=""></textarea>
